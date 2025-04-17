@@ -2,6 +2,7 @@ const cells = document.querySelectorAll("[data-cell]");
 const board = document.getElementById("board");
 const popup = document.getElementById("popup");
 const popupMessage = document.getElementById("popup-message");
+const restartBtn = document.getElementById("restartBtn");
 
 let currentPlayer = "X";
 
@@ -10,6 +11,8 @@ const WINNING_COMBINATIONS = [
   [0,3,6], [1,4,7], [2,5,8],
   [0,4,8], [2,4,6]
 ];
+
+restartBtn.addEventListener("click", startGame);
 
 startGame();
 
@@ -27,11 +30,11 @@ function handleClick(e) {
   const cell = e.target;
   cell.innerText = currentPlayer;
   cell.classList.add("disabled");
-  
+
   if (checkWin(currentPlayer)) {
     showPopup(`${currentPlayer} Wins!`);
   } else if (isDraw()) {
-    showPopup("Draw!");
+    showPopup("It's a Draw!");
   } else {
     currentPlayer = currentPlayer === "X" ? "O" : "X";
   }
