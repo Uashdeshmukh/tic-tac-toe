@@ -1,39 +1,61 @@
 body {
-  font-family: 'Segoe UI', sans-serif;
-  text-align: center;
-  background: #f0f4f8;
   margin: 0;
-  padding: 2rem;
+  font-family: 'Segoe UI', sans-serif;
+  background: linear-gradient(to right, #e3f2fd, #bbdefb);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 100vh;
+}
+
+.container {
+  text-align: center;
 }
 
 h1 {
-  margin-bottom: 2rem;
-  color: #333;
+  color: #0d47a1;
+  margin-bottom: 20px;
+  font-size: 2.5rem;
 }
 
 .board {
   display: grid;
   grid-template-columns: repeat(3, 100px);
   gap: 10px;
-  margin: auto;
-  width: max-content;
+  margin: 0 auto 20px;
 }
 
 .cell {
   width: 100px;
   height: 100px;
-  background: white;
-  border: 2px solid #ccc;
+  background-color: white;
+  border: 2px solid #90caf9;
   font-size: 2.5rem;
+  color: #0d47a1;
   display: flex;
   align-items: center;
   justify-content: center;
   cursor: pointer;
-  transition: 0.3s;
+  transition: 0.2s ease-in-out;
 }
 
 .cell:hover {
   background-color: #e3f2fd;
+}
+
+button {
+  padding: 10px 20px;
+  background-color: #0d47a1;
+  color: white;
+  border: none;
+  font-size: 1rem;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+button:hover {
+  background-color: #1565c0;
 }
 
 .popup {
@@ -51,24 +73,14 @@ h1 {
 .popup-content {
   background: white;
   padding: 30px;
-  border-radius: 10px;
+  border-radius: 12px;
   text-align: center;
   animation: fadeIn 0.5s ease;
+  box-shadow: 0 0 20px rgba(0,0,0,0.2);
 }
 
 .hidden {
   display: none;
-}
-
-button {
-  margin-top: 1rem;
-  padding: 10px 20px;
-  font-size: 1rem;
-  background: #1976d2;
-  color: white;
-  border: none;
-  border-radius: 5px;
-  cursor: pointer;
 }
 
 @keyframes fadeIn {
