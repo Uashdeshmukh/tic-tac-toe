@@ -1,77 +1,56 @@
-body {
-  font-family: 'Segoe UI', sans-serif;
-  text-align: center;
-  background: #f0f4f8;
-  margin: 0;
-  padding: 2rem;
+const cells = document.querySelectorAll("[data-cell]");
+const board = document.getElementById("board");
+const popup = document.getElementById("popup");
+const popupMessage = document.getElementById("popup-message");
+
+let currentPlayer = "X";
+
+const WINNING_COMBINATIONS = [
+  [0,1,2], [3,4,5], [6,7,8],
+  [0,3,6], [1,4,7], [2,5,8],
+  [0,4,8], [2,4,6]
+];
+
+startGame();
+
+function startGame() {
+  currentPlayer = "X";
+  popup.classList.add("hidden");
+  cells.forEach(cell => {
+    cell.innerText = "";
+    cell.classList.remove("disabled");
+    cell.addEventListener("click", handleClick, { once: true });
+  });
 }
 
-h1 {
-  margin-bottom: 2rem;
-  color: #333;
+function handleClick(e) {
+  const cell = e.target;
+  cell.innerText = currentPlayer;
+  cell.classList.add("disabled");
+  
+  if (checkWin(currentPlayer)) {
+    showPopup(`${currentPlayer} Wins!`);
+  } else if (isDraw()) {
+    showPopup("Draw!");
+  } else {
+    currentPlayer = currentPlayer === "X" ? "O" : "X";
+  }
 }
 
-.board {
-  display: grid;
-  grid-template-columns: repeat(3, 100px);
-  gap: 10px;
-  margin: auto;
-  width: max-content;
+function checkWin(player) {
+  return WINNING_COMBINATIONS.some(comb => {
+    return comb.every(index => {
+      return cells[index].innerText === player;
+    });
+  });
 }
 
-.cell {
-  width: 100px;
-  height: 100px;
-  background: white;
-  border: 2px solid #ccc;
-  font-size: 2.5rem;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  cursor: pointer;
-  transition: 0.3s;
+function isDraw() {
+  return [...cells].every(cell => cell.innerText !== "");
 }
 
-.cell:hover {
-  background-color: #e3f2fd;
-}
-
-.popup {
-  position: fixed;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  background: rgba(0,0,0,0.6);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
-
-.popup-content {
-  background: white;
-  padding: 30px;
-  border-radius: 10px;
-  text-align: center;
-  animation: fadeIn 0.5s ease;
-}
-
-.hidden {
-  display: none;
-}
-
-button {
-  margin-top: 1rem;
-  padding: 10px 20px;
-  font-size: 1rem;
-  background: #1976d2;
-  color: white;
-  border: none;
-  border-radius: 5px;
-  cursor: pointer;
-}
-
-@keyframes fadeIn {
-  from { transform: scale(0.8); opacity: 0; }
-  to { transform: scale(1); opacity: 1; }
+function showPopup(message) {
+  popupMessage.innerText = message;
+  popup.classList.remove("hidden");
+  cells.forEach(cell => cell.classList.add("disabled"));
 }
