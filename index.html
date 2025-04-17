@@ -3,14 +3,30 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>O X Game</title>
+  <title>Tic Tac Toe Game</title>
   <link rel="stylesheet" href="style.css" />
 </head>
 <body>
-  <h1>O X Game</h1>
-  <div id="game-board" class="board"></div>
-  <p id="status">Player X's turn</p>
-  <button onclick="restartGame()">Restart</button>
+  <h1>Tic Tac Toe - O X Game</h1>
+  <div class="board" id="board">
+    <!-- 9 cells -->
+    <div class="cell" data-cell></div>
+    <div class="cell" data-cell></div>
+    <div class="cell" data-cell></div>
+    <div class="cell" data-cell></div>
+    <div class="cell" data-cell></div>
+    <div class="cell" data-cell></div>
+    <div class="cell" data-cell></div>
+    <div class="cell" data-cell></div>
+    <div class="cell" data-cell></div>
+  </div>
+
+  <div id="popup" class="popup hidden">
+    <div class="popup-content">
+      <h2 id="popup-message"></h2>
+      <button onclick="startGame()">Play Again</button>
+    </div>
+  </div>
 
   <script src="script.js"></script>
 </body>
